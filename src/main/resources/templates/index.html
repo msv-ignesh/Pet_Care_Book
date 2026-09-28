@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetCareBook</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="topbar">
+    <div>
+        <h1>🐾 PetCareBook</h1>
+        <p>Pet Vaccination Reminder System</p>
+    </div>
+</header>
+
+<main class="container">
+    <section class="hero">
+        <div>
+            <h2>Pet health records, organized.</h2>
+            <p>Register pets, record vaccinations, automatically calculate due dates, and monitor vaccinations due in the next 7 days.</p>
+        </div>
+        <div class="today" id="today"></div>
+    </section>
+
+    <section class="stats" id="stats">
+        <div class="card"><span>Owners</span><strong id="owners">0</strong></div>
+        <div class="card"><span>Pets</span><strong id="pets">0</strong></div>
+        <div class="card"><span>Vaccine Types</span><strong id="types">0</strong></div>
+        <div class="card alert"><span>Due in 7 Days</span><strong id="due">0</strong></div>
+    </section>
+
+    <section class="grid">
+        <div class="panel">
+            <h3>Register Owner</h3>
+            <form id="ownerForm">
+                <input id="ownerName" placeholder="Owner name" required>
+                <input id="ownerEmail" type="email" placeholder="Email">
+                <input id="ownerPhone" placeholder="Phone">
+                <button>Save Owner</button>
+            </form>
+        </div>
+
+        <div class="panel">
+            <h3>Register Pet</h3>
+            <form id="petForm">
+                <select id="petOwner" required></select>
+                <input id="petName" placeholder="Pet name" required>
+                <input id="petSpecies" placeholder="Species (Dog, Cat...)" required>
+                <input id="petBreed" placeholder="Breed">
+                <label>Date of birth</label>
+                <input id="petDob" type="date" required>
+                <button>Save Pet</button>
+            </form>
+        </div>
+
+        <div class="panel">
+            <h3>Log Vaccination</h3>
+            <form id="vaccinationForm">
+                <select id="vaccinationPet" required></select>
+                <select id="vaccinationType" required></select>
+                <label>Date given</label>
+                <input id="dateGiven" type="date" required>
+                <button>Log Vaccination</button>
+                <small>Next due date is calculated automatically from the vaccine interval.</small>
+            </form>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-head">
+            <h3>Vaccinations Due in the Next 7 Days</h3>
+            <button class="secondary" onclick="loadDue()">Refresh</button>
+        </div>
+        <div id="dueTable" class="table-wrap"></div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-head">
+            <h3>Complete Vaccination History</h3>
+            <div class="inline">
+                <select id="historyPet"></select>
+                <button class="secondary" onclick="loadHistory()">Refresh History</button>
+            </div>
+        </div>
+        <div id="historyTable" class="table-wrap"></div>
+    </section>
+
+    <div id="message" class="message"></div>
+</main>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
